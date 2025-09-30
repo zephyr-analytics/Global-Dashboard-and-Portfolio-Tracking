@@ -2,7 +2,7 @@ stock_dir: "stock_files"
 etf_dir: "etf_files"
 ticker_column: "Ticker"
 start_date: "2010-01-01"
-end_date: "2025-09-24"
+end_date: "2025-09-26"
 
 # stocks, etfs, both
 pipeline: "both"
