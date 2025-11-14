@@ -33,7 +33,7 @@ class DashboardProcessor:
             adj_close.columns = tickers if len(tickers) == 1 else adj_close.columns
 
         # --- Filter tickers with at least 10 years of data ---
-        min_days = 252 * 10
+        min_days = 252 * 8
         keep = [col for col in adj_close.columns if adj_close[col].dropna().shape[0] >= min_days]
         filtered = adj_close[keep]
 
@@ -99,13 +99,13 @@ class DashboardProcessor:
         for ticker in tickers:
             try:
                 info = yf.Ticker(ticker).info
-                trailing_pe = info.get("trailingPE", None)
-                forward_pe = info.get("forwardPE", None)
+                # trailing_pe = info.get("trailingPE", None)
+                # forward_pe = info.get("forwardPE", None)
 
-                if trailing_pe and forward_pe and forward_pe > 0:
-                    expected_growth = (trailing_pe / forward_pe) - 1
-                else:
-                    expected_growth = None
+                # if trailing_pe and forward_pe and forward_pe > 0:
+                #     expected_growth = (trailing_pe / forward_pe) - 1
+                # else:
+                #     expected_growth = None
 
                 records.append({
                     "Ticker": ticker,
@@ -115,11 +115,11 @@ class DashboardProcessor:
                     "Country": info.get("country", ""),
                     "Region": info.get("region", ""),
                     "MarketCap": info.get("marketCap", None),
-                    "TrailingPE": trailing_pe,
-                    "ForwardPE": forward_pe,
-                    "ExpectedEarningsGrowth": expected_growth,
-                    "TotalRevenue": info.get("totalRevenue", None),
-                    "FreeCashflow": info.get("freeCashflow", None)
+                    # "TrailingPE": trailing_pe,
+                    # "ForwardPE": forward_pe,
+                    # "ExpectedEarningsGrowth": expected_growth,
+                    # "TotalRevenue": info.get("totalRevenue", None),
+                    # "FreeCashflow": info.get("freeCashflow", None)
                 })
             except Exception as e:
                 print(f"⚠️ Error fetching stock {ticker}: {e}")
